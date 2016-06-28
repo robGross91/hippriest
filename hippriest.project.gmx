@@ -11,11 +11,22 @@
     <sprite>sprites\spr_npc2</sprite>
     <sprite>sprites\spr_npc3</sprite>
     <sprite>sprites\spr_player</sprite>
-    <sprite>sprites\spr_battleAxel</sprite>
-    <sprite>sprites\spr_battleRob</sprite>
-    <sprite>sprites\spr_battleLorry</sprite>
-    <sprite>sprites\spr_battleJimi</sprite>
     <sprite>sprites\spr_battlecharselect</sprite>
+    <sprites name="battleCharacters">
+      <sprite>sprites\spr_battleAxel</sprite>
+      <sprite>sprites\spr_battleAxelAttack</sprite>
+      <sprite>sprites\spr_battleRobAttack</sprite>
+      <sprite>sprites\spr_battleLorryAttack</sprite>
+      <sprite>sprites\spr_battleJimiAttack</sprite>
+      <sprite>sprites\spr_battleRob</sprite>
+      <sprite>sprites\spr_battleLorry</sprite>
+      <sprite>sprites\spr_battleJimi</sprite>
+    </sprites>
+    <sprites name="battleMonsters">
+      <sprite>sprites\spr_battleMonster</sprite>
+      <sprite>sprites\spr_battleMonsterAttack</sprite>
+    </sprites>
+    <sprite>sprites\spr_monsterSelector</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_battle</background>
@@ -28,26 +39,33 @@
     <script>scripts\flashingEvent.gml</script>
     <script>scripts\flashingEvent2.gml</script>
     <script>scripts\executeEvent.gml</script>
+    <script>scripts\setBattleCharacterSprites.gml</script>
+    <script>scripts\initializeStats.gml</script>
   </scripts>
   <objects name="objects">
+    <objects name="battleCharacters">
+      <object>objects\obj_battleJimi</object>
+      <object>objects\obj_battleRob</object>
+      <object>objects\obj_battleAxel</object>
+      <object>objects\obj_battleLorry</object>
+    </objects>
     <object>objects\obj_parent_wall</object>
     <object>objects\obj_parent_npc</object>
-    <object>objects\obj_input</object>
     <object>objects\obj_player</object>
+    <object>objects\obj_input</object>
     <object>objects\obj_wall</object>
     <object>objects\obj_testnpc</object>
     <object>objects\obj_parent_battleCharacters</object>
-    <object>objects\obj_battleAxel</object>
-    <object>objects\obj_battleLorry</object>
-    <object>objects\obj_battleJimi</object>
-    <object>objects\obj_battleRob</object>
     <object>objects\obj_battleController</object>
     <object>objects\obj_charSelect</object>
     <object>objects\obj_ground_grass1</object>
+    <object>objects\obj_parent_battleMonsters</object>
+    <object>objects\obj_battleMonster</object>
+    <object>objects\obj_monsterSelector</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_battle</room>
     <room>rooms\rm_world_view</room>
+    <room>rooms\rm_battle</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

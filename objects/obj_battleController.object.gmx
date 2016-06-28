@@ -26,10 +26,51 @@
           <argument>
             <kind>1</kind>
             <string>//*****************************TESTING CODE REMOVE*************
-global.axelHealth = 70;
-global.lorryHealth = 70;
-global.robHealth = 70;
-global.jimiHealth = 70;
+global.healthArray[0] = 70;
+global.healthArray[1] = 70;
+global.healthArray[2] = 70;
+global.healthArray[3] = 70;
+
+global.characterArray[0] = obj_battleAxel;
+global.characterArray[1] = obj_battleLorry;
+global.characterArray[2] = obj_battleRob;
+global.characterArray[3] = obj_battleJimi;
+
+currentIndex = 0;
+noOfMonsters = instance_number(obj_parent_battleMonsters);
+currentMonster = instance_find(obj_parent_battleMonsters, currentIndex);
+currentMonsterSprite = currentMonster.sprite_index;
+
+charSelect = obj_battleRob;
+
+selectingMonster = false;
+
+randomize();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>noOfMonsters = instance_number(obj_parent_battleMonsters);
+currentMonster = instance_find(obj_parent_battleMonsters, currentIndex);
+currentMonsterSprite = currentMonster.sprite_index;
 </string>
           </argument>
         </arguments>
@@ -53,16 +94,110 @@ global.jimiHealth = 70;
           <argument>
             <kind>1</kind>
             <string>// draw health bars for players:
-var x1 = 310;
-var barHeight = 4;
+var x1 = 373;
+var barHeight = 5;
 // axel:
-draw_rectangle_color(x1, 145, x1 + global.axelHealth, 145 + barHeight, c_red, c_red, c_red, c_red, false);
+draw_rectangle_color(x1, 170, x1 + global.healthArray[0], 170 + barHeight, c_red, c_red, c_red, c_red, false);
 //lorry:
-draw_rectangle_color(x1, 165, x1 + global.lorryHealth, 165 + barHeight, c_red, c_red, c_red, c_red, false);
+draw_rectangle_color(x1, 195, x1 + global.healthArray[1], 195 + barHeight, c_red, c_red, c_red, c_red, false);
 //rob:
-draw_rectangle_color(x1, 185, x1 + global.robHealth, 185 + barHeight, c_red, c_red, c_red, c_red, false);
+draw_rectangle_color(x1, 220, x1 + global.healthArray[2], 220 + barHeight, c_red, c_red, c_red, c_red, false);
 //jimi:
-draw_rectangle_color(x1, 205, x1 + global.jimiHealth, 205 + barHeight, c_red, c_red, c_red, c_red, false);
+draw_rectangle_color(x1, 245, x1 + global.healthArray[3], 245 + barHeight, c_red, c_red, c_red, c_red, false);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="39">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (selectingMonster = true) {    
+    if (currentIndex == noOfMonsters - 1) {
+        currentIndex = 0;
+    }
+    else {
+        currentIndex = currentIndex + 1;
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="37">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (selectingMonster = true) {
+    if (currentIndex != 0) {
+        currentIndex = currentIndex - 1;
+    }
+    else {
+        currentIndex = noOfMonsters - 1;
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="32">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>// if currently selecting a monster to interact with:
+if (selectingMonster = true) {
+    // change animation:
+    charSelect.sprite_index = charSelect.attackSprite;
+    // do damage:
+    currentMonster.monsterHealth = currentMonster.monsterHealth - charSelect.attackDamage;
+    selectingMonster = false;
+    instance_create(0, 0, obj_charSelect);
+    with (obj_monsterSelector){
+        instance_destroy();
+   }
+}
 </string>
           </argument>
         </arguments>
