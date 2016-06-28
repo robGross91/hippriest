@@ -9,24 +9,31 @@
     <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_npc</sprite>
     <sprite>sprites\spr_player</sprite>
+    <sprite>sprites\spr_battleAxel</sprite>
+    <sprite>sprites\spr_battleRob</sprite>
+    <sprite>sprites\spr_battleLorry</sprite>
+    <sprite>sprites\spr_battleJimi</sprite>
+    <sprite>sprites\spr_battlecharselect</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_battle</background>
-    <background>background\tiles_grass16bit</background>
-    <background>background\tiles_grass8bit</background>
-    <background>background\tiles_grass4bit</background>
   </backgrounds>
   <paths name="paths"/>
   <objects name="objects">
     <object>objects\obj_player</object>
     <object>objects\obj_input</object>
     <object>objects\obj_wall</object>
-    <object>objects\obj_parent_wall</object>
-    <object>objects\obj_ground_grass1</object>
+    <object>objects\obj_parent_battleCharacters</object>
+    <object>objects\obj_battleAxel</object>
+    <object>objects\obj_battleLorry</object>
+    <object>objects\obj_battleJimi</object>
+    <object>objects\obj_battleRob</object>
+    <object>objects\obj_battleController</object>
+    <object>objects\obj_charSelect</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_world_view</room>
     <room>rooms\rm_battle</room>
+    <room>rooms\rm_world_view</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>-1</persistent>
+  <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -25,20 +25,17 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>globalvar
-g_keyDirection,          // holds value for active direction key pressed
-g_keyDirectionIsPressed,    // is true when direction key first pressed down
-g_keyDirectionIsReleased;   // is true when direction key is released
-
-g_keyDirection = -1; // initialize as -1 to ensure no initial false input
-g_keyDirectionIsPressed = false;
-g_keyDirectionIsReleased = false;
+            <string>//*****************************TESTING CODE REMOVE*************
+global.axelHealth = 70;
+global.lorryHealth = 70;
+global.robHealth = 70;
+global.jimiHealth = 70;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="1">
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -55,59 +52,17 @@ g_keyDirectionIsReleased = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// First, clear global Pressed/Released states
-g_keyDirectionIsPressed = false;
-g_keyDirectionIsReleased = false;
-
-// Second, Check for ARROW
-if (keyboard_check_pressed(vk_right))
-{
-    g_keyDirection = 0;
-    g_keyDirectionIsPressed = true;
-}
-else 
-if (keyboard_check_pressed(vk_up))
-{
-    g_keyDirection = 90;
-    g_keyDirectionIsPressed = true;
-}
-else 
-if (keyboard_check_pressed(vk_left))
-{
-    g_keyDirection = 180;
-    g_keyDirectionIsPressed = true;
-}
-else 
-if (keyboard_check_pressed(vk_down))
-{
-    g_keyDirection = 270;
-    g_keyDirectionIsPressed = true;
-}
-
-// Third, Check for ARROW releases
-if (keyboard_check_released(vk_right) // Arrow keys
-or  keyboard_check_released(vk_up)
-or  keyboard_check_released(vk_left)
-or  keyboard_check_released(vk_down)
-or  keyboard_check_released(ord('D')) // WASD keys
-or  keyboard_check_released(ord('W'))
-or  keyboard_check_released(ord('A'))
-or  keyboard_check_released(ord('S')))
-{
-    g_keyDirectionIsReleased = true;
-    g_keyDirection = -1; // Make sure to clear this first
-    
-    if (keyboard_check(vk_right)) g_keyDirection = 0;   else
-    if (keyboard_check(vk_up))    g_keyDirection = 90;  else
-    if (keyboard_check(vk_left))  g_keyDirection = 180; else
-    if (keyboard_check(vk_down))  g_keyDirection = 270; else
-    if (keyboard_check(ord('D'))) g_keyDirection = 0;   else
-    if (keyboard_check(ord('W'))) g_keyDirection = 90;  else
-    if (keyboard_check(ord('A'))) g_keyDirection = 180; else
-    if (keyboard_check(ord('S'))) g_keyDirection = 270;
-}
-
-    
+            <string>// draw health bars for players:
+var x1 = 310;
+var barHeight = 4;
+// axel:
+draw_rectangle_color(x1, 145, x1 + global.axelHealth, 145 + barHeight, c_red, c_red, c_red, c_red, false);
+//lorry:
+draw_rectangle_color(x1, 165, x1 + global.lorryHealth, 165 + barHeight, c_red, c_red, c_red, c_red, false);
+//rob:
+draw_rectangle_color(x1, 185, x1 + global.robHealth, 185 + barHeight, c_red, c_red, c_red, c_red, false);
+//jimi:
+draw_rectangle_color(x1, 205, x1 + global.jimiHealth, 205 + barHeight, c_red, c_red, c_red, c_red, false);
 </string>
           </argument>
         </arguments>
