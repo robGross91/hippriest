@@ -4,11 +4,11 @@
   <solid>-1</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>-1</persistent>
+  <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="4" ename="obj_player">
+    <event eventtype="9" enumb="32">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,7 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>speed = 0; //reduces player speed to 0 on collision with any wall object
+            <string>//determines if the npc is within the interaction range (5px) of the player
+if distance_to_object(obj_player) &lt; 5 {
+
+//finds the instance ID of the child npc to this parent NPC and then executes
+//a script.
+var instanceID = instance_nearest(obj_player.x,obj_player.y,obj_parent_npc); //instance ID
+script_execute(executeEvent, instanceID); //works
+}
 </string>
           </argument>
         </arguments>

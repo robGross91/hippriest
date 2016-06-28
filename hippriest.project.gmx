@@ -8,6 +8,8 @@
   <sprites name="sprites">
     <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_npc</sprite>
+    <sprite>sprites\spr_npc2</sprite>
+    <sprite>sprites\spr_npc3</sprite>
     <sprite>sprites\spr_player</sprite>
     <sprite>sprites\spr_battleAxel</sprite>
     <sprite>sprites\spr_battleRob</sprite>
@@ -22,10 +24,18 @@
     <background>background\tiles_grass4bit</background>
   </backgrounds>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\flashingEvent.gml</script>
+    <script>scripts\flashingEvent2.gml</script>
+    <script>scripts\executeEvent.gml</script>
+  </scripts>
   <objects name="objects">
-    <object>objects\obj_player</object>
+    <object>objects\obj_parent_wall</object>
+    <object>objects\obj_parent_npc</object>
     <object>objects\obj_input</object>
+    <object>objects\obj_player</object>
     <object>objects\obj_wall</object>
+    <object>objects\obj_testnpc</object>
     <object>objects\obj_parent_battleCharacters</object>
     <object>objects\obj_battleAxel</object>
     <object>objects\obj_battleLorry</object>
@@ -33,14 +43,11 @@
     <object>objects\obj_battleRob</object>
     <object>objects\obj_battleController</object>
     <object>objects\obj_charSelect</object>
-    <object>objects\obj_parent_wall</object>
     <object>objects\obj_ground_grass1</object>
-    <object>objects\test_eatmytwat</object>
-    <object>objects\ayyylmao</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_world_view</room>
     <room>rooms\rm_battle</room>
+    <room>rooms\rm_world_view</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
