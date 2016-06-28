@@ -35,6 +35,7 @@
     <object>objects\obj_charSelect</object>
     <object>objects\obj_parent_wall</object>
     <object>objects\obj_ground_grass1</object>
+    <object>objects\obj_robisgaylord</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_world_view</room>
