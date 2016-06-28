@@ -17,6 +17,9 @@
   </sprites>
   <backgrounds name="background">
     <background>background\bg_battle</background>
+    <background>background\tiles_grass16bit</background>
+    <background>background\tiles_grass8bit</background>
+    <background>background\tiles_grass4bit</background>
   </backgrounds>
   <paths name="paths"/>
   <objects name="objects">
@@ -30,10 +33,12 @@
     <object>objects\obj_battleRob</object>
     <object>objects\obj_battleController</object>
     <object>objects\obj_charSelect</object>
+    <object>objects\obj_parent_wall</object>
+    <object>objects\obj_ground_grass1</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_battle</room>
     <room>rooms\rm_world_view</room>
+    <room>rooms\rm_battle</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
