@@ -28,6 +28,99 @@
             <string>// initialize animation speed, 1 = 60fps
 image_speed = 0.5;
 
+alarm[0] = 2;
+
+// variables handling fire damage:
+onFire = false;
+// how much total fire damage to deal:
+totalFire = 0;
+// how much fire damage has been dealt so far:
+currentFire = 0;
+
+critted = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Generic damage alarm
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Inflict burn damage
+if (currentFire &lt; totalFire) {
+    // play burning sound effect
+    // draw damage value
+    alarm[2] = 40;
+    monsterHealth = monsterHealth - 5;
+    currentFire = currentFire + 5;
+    // reset alarm
+    alarm[1] = 120;
+}
+// no more damage to deal, no longer on fire
+else {
+    onFire = false;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// draw physical damage
+critted = false;
 </string>
           </argument>
         </arguments>
@@ -50,35 +143,44 @@ image_speed = 0.5;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var actionTrigger = random_range(0, 100);
+            <string>/// Check for action
+
+var actionTrigger = random_range(0, 100);
 var attackTrigger = random_range(0, 100);
 var spellTrigger = random_range(0, 100);
 
+if (cooldown != 0) {
+    cooldown = cooldown - 1;
+}
 
-// Check whether it's the monster's time to act:
-if (actionTrigger &lt; actionProbability) {
-    // hasActed ensures that the monster will not use two actions 
-    // when triggered
+if (cooldown == 0) {
+    // Check whether it's the monster's time to act:
+    if (actionTrigger &lt; actionProbability) {
+        // hasActed ensures that the monster will not use two actions 
+        // when triggered
+        
+        var hasActed = false;
+        // determine target of action
+        var target = choose(0,1,2,3);
+        
+        
     
-    var hasActed = false;
-    // determine target of action
-    var target = choose(0,1,2,3);
-    
-    
-
-    // Action triggered,
-    // check if attacking:
-    if (attackTrigger &lt; attackProbability &amp;&amp; hasActed = false) {
-        // attack
-        sprite_index = attackSprite;
-        global.healthArray[target] = global.healthArray[target] - attackDamage;
-        hasActed = true;
-    }
-    // Check if using spells:
-    if (spellTrigger &lt; spellProbability &amp;&amp; hasActed = false) {
-        // use spell
-        global.healthArray[target] = global.healthArray[target] - spellDamage;
-        hasActed = true;
+        // Action triggered,
+        // check if attacking:
+        if (attackTrigger &lt; attackProbability &amp;&amp; hasActed = false) {
+            // attack
+            sprite_index = attackSprite;
+            global.healthArray[target] = global.healthArray[target] - attackDamage;
+            hasActed = true;
+            cooldown = 120;
+        }
+        // Check if using spells:
+        if (spellTrigger &lt; spellProbability &amp;&amp; hasActed = false) {
+            // use spell
+            global.healthArray[target] = global.healthArray[target] - spellDamage;
+            hasActed = true;
+            cooldown = 120;
+        }
     }
 }
     
@@ -104,8 +206,55 @@ if (actionTrigger &lt; actionProbability) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// draw health bar of monster:
-draw_rectangle_color(x, y - 10, x + monsterHealth, y - 7, c_red, c_red, c_red, c_red, false);
+            <string>/// Draw Health bar
+thisHealth = monsterHealth;
+
+
+// determine whether health has changed:
+if (monsterHealth != oldHealth) {
+    // move oldHealth towards monster health in increments of one
+    if (monsterHealth &gt; oldHealth) {
+        oldHealth = oldHealth + 1;
+    }
+    if (monsterHealth &lt; oldHealth) {
+        oldHealth = oldHealth - 1;
+    }
+    thisHealth = oldHealth;
+}
+
+script_execute(scr_drawBar, x, thisHealth, y - 10, y - 7, c_red, 75, maxHealth);
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Draw damage
+
+if (alarm[2] &gt; 1) {
+    // some damage needs to be drawn
+    if (alarm[0] &gt; 1) {
+    // physical damage needs to be drawn
+        script_execute(scr_damageText, thisDamage, "physical", x + 10, y - 35, critted);
+    }
+    else if (onFire == true) {
+        script_execute(scr_damageText,5, "fire", x + 50, y - 35, false);
+    }
+}
 </string>
           </argument>
         </arguments>

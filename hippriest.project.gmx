@@ -48,25 +48,36 @@
       <sprite>sprites\spr_battleMonsterAttack</sprite>
     </sprites>
     <sprite>sprites\spr_monsterSelector</sprite>
+    <sprites name="battleEffects">
+      <sprite>sprites\spr_battleSlash</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_battle</background>
     <background>background\tiles_grass16bit</background>
     <background>background\tiles_grass8bit</background>
     <background>background\tiles_grass4bit</background>
+    <background>background\bg_battleScenery</background>
   </backgrounds>
   <paths name="paths">
     <path>paths\path_npc2</path>
   </paths>
   <scripts name="scripts">
-    <script>scripts\setBattleCharacterSprites.gml</script>
-    <script>scripts\initializeStats.gml</script>
     <script>scripts\worldCollision.gml</script>
     <script>scripts\turnNPC.gml</script>
     <script>scripts\drawDialogue.gml</script>
+    <script>scripts\setBattleParameters.gml</script>
+    <script>scripts\scr_basicArmor.gml</script>
+    <script>scripts\scr_basicWeapon.gml</script>
+    <script>scripts\scr_basicMagic.gml</script>
+    <script>scripts\scr_assignEquipParams.gml</script>
+    <script>scripts\scr_damageText.gml</script>
+    <script>scripts\scr_drawBar.gml</script>
+    <script>scripts\scr_calculateDamage.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_dialogue</font>
+    <font>fonts\font_damage</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_player</object>
@@ -99,11 +110,12 @@
     <object>objects\obj_parent_battleMonsters</object>
     <object>objects\obj_battleMonster</object>
     <object>objects\obj_monsterSelector</object>
+    <object>objects\obj_battleSlash</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_world_view</room>
-    <room>rooms\rm_test</room>
     <room>rooms\rm_battle</room>
+    <room>rooms\rm_test</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

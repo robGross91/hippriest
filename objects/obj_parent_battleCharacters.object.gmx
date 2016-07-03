@@ -25,7 +25,37 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_speed = 0.5;
+            <string>/// Set animation speed
+
+image_speed = 0.5;
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// cooldown
+if (cooldown != 0) {
+    cooldown = cooldown - 1;
+    }
 </string>
           </argument>
         </arguments>
@@ -55,7 +85,7 @@ sprite_index = idleSprite;
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="87">
+    <event eventtype="8" enumb="73">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -72,103 +102,93 @@ sprite_index = idleSprite;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (global.charSelect == object_get_name(object_index)) {
-    // USE MAGICK
-    
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="83">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if (global.charSelect == object_get_name(object_index)) {
-    // USE BLOCk
-    
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="68">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if (global.charSelect == object_get_name(object_index)) {
-    // USE ATTACK
-    
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="65">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>// attack
-// select monster if more than one
-// if only one monster
-if (obj_battleController.noOfMonsters == 1) {
-    var thisMonster = obj_battleController.currentMonster;
-    // change animation:
-    sprite_index = attackSprite;
-    // do damage:
-    thisMonster.monsterHealth = thisMonster.monsterHealth - attackDamage;
-}
-// if more than one monster
-else {
-    with (obj_charSelect){
-        instance_destroy();
-   }
-    instance_create(0, 0, obj_monsterSelector);
-    obj_battleController.selectingMonster = true;
-}
+            <string>/// Draw cooldown bar
 
+if (cooldown != 0) {
+    script_execute(scr_drawBar, x, cooldown, y - 10, y - 7, c_yellow, 50, maxCooldown);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="90">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Attack
+
+if (obj_battleController.charSelect.x == x &amp;&amp; obj_battleController.charSelect.y == y) { 
+    // check cooldown:
+    if (cooldown = 0) {
+        
+        // attack
+        // select monster if more than one
+
+        with (obj_charSelect){
+            // remove the character selector
+            instance_destroy();
+       }
+       // create the monster selector
+        instance_create(0, 0, obj_monsterSelector);
+        obj_battleController.selectingMonster = true;
+        obj_battleController.actionSelector = "attack";
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="88">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Magic
+
+if (obj_battleController.charSelect.x == x &amp;&amp; obj_battleController.charSelect.y == y) { 
+    // check cooldown:
+    if (cooldown = 0) {
+        
+        // use magic
+        // select monster if more than one
+
+        with (obj_charSelect){
+            // remove the character selector
+            instance_destroy();
+       }
+       // create the monster selector
+        instance_create(0, 0, obj_monsterSelector);
+        obj_battleController.selectingMonster = true;
+        obj_battleController.actionSelector = "magic";
+    }
+}
 </string>
           </argument>
         </arguments>

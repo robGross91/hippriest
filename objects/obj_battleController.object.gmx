@@ -25,26 +25,93 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//*****************************TESTING CODE REMOVE*************
+            <string>/// MOVE THIS global initialization
+//*****************************TESTING CODE REMOVE*************
 global.healthArray[0] = 70;
 global.healthArray[1] = 70;
 global.healthArray[2] = 70;
 global.healthArray[3] = 70;
+
+global.maxHealth = 70;
 
 global.characterArray[0] = obj_battleAxel;
 global.characterArray[1] = obj_battleLorry;
 global.characterArray[2] = obj_battleRob;
 global.characterArray[3] = obj_battleJimi;
 
+global.axelInventory[0] = scr_basicArmor;
+global.axelInventory[1] = scr_basicWeapon;
+global.axelInventory[2] = scr_basicMagic;
+
+global.lorryInventory[0] = scr_basicArmor;
+global.lorryInventory[1] = scr_basicWeapon;
+global.lorryInventory[2] = scr_basicMagic;
+
+global.robInventory[0] = scr_basicArmor;
+global.robInventory[1] = scr_basicWeapon;
+global.robInventory[2] = scr_basicMagic;
+
+global.jimiInventory[0] = scr_basicArmor;
+global.jimiInventory[1] = scr_basicWeapon;
+global.jimiInventory[2] = scr_basicMagic;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Initializing variables
+
+global.view = "battle";
+
+// related to the monster selector:
 currentIndex = 0;
 noOfMonsters = instance_number(obj_parent_battleMonsters);
 currentMonster = instance_find(obj_parent_battleMonsters, currentIndex);
 currentMonsterSprite = currentMonster.sprite_index;
+selectingMonster = false;
+// actionSelector tracks whether the player is currently
+// attacking or casting magic
+actionSelector = "none";
 
+// related to the character selector:
 charSelect = obj_battleRob;
 
-selectingMonster = false;
 
+
+
+// allocate equipment values to all characters:
+
+for (var i = 0; i &lt; 3; i++) {
+    script_execute(global.axelInventory[i], obj_battleAxel);
+}
+
+for (var j = 0; j &lt; 3; j++) {
+    script_execute(global.lorryInventory[j], obj_battleLorry);
+}
+
+for (var k = 0; k &lt; 3; k++) {
+    script_execute(global.robInventory[k], obj_battleRob);
+}
+
+for (var l = 0; l &lt; 3; l++) {
+    script_execute(global.jimiInventory[l], obj_battleJimi);
+}
+    
 randomize();
 </string>
           </argument>
@@ -93,17 +160,19 @@ currentMonsterSprite = currentMonster.sprite_index;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// draw health bars for players:
+            <string>/// Draw UI
+// draw health bars for players:
 var x1 = 373;
 var barHeight = 5;
 // axel:
-draw_rectangle_color(x1, 170, x1 + global.healthArray[0], 170 + barHeight, c_red, c_red, c_red, c_red, false);
+script_execute(scr_drawBar, x1, global.healthArray[0], 170, 170 + barHeight, c_red, 100, global.maxHealth);
 //lorry:
-draw_rectangle_color(x1, 195, x1 + global.healthArray[1], 195 + barHeight, c_red, c_red, c_red, c_red, false);
+script_execute(scr_drawBar, x1, global.healthArray[1], 195, 195 + barHeight, c_red, 100, global.maxHealth);
 //rob:
-draw_rectangle_color(x1, 220, x1 + global.healthArray[2], 220 + barHeight, c_red, c_red, c_red, c_red, false);
+script_execute(scr_drawBar, x1, global.healthArray[2], 220, 220 + barHeight, c_red, 100, global.maxHealth);
 //jimi:
-draw_rectangle_color(x1, 245, x1 + global.healthArray[3], 245 + barHeight, c_red, c_red, c_red, c_red, false);
+script_execute(scr_drawBar, x1, global.healthArray[3], 245, 245 + barHeight, c_red, 100, global.maxHealth);
+
 </string>
           </argument>
         </arguments>
@@ -186,18 +255,55 @@ draw_rectangle_color(x1, 245, x1 + global.healthArray[3], 245 + barHeight, c_red
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// if currently selecting a monster to interact with:
+            <string>/// Use Action:
+
+// if currently selecting a monster to interact with:
 if (selectingMonster = true) {
-    // change animation:
-    charSelect.sprite_index = charSelect.attackSprite;
-    // do damage:
-    currentMonster.monsterHealth = currentMonster.monsterHealth - charSelect.attackDamage;
+    currentMonster.critted = false;
+    // if attacking
+    if (actionSelector == "attack") {
+        // reset cooldown
+        charSelect.cooldown = charSelect.cooldownAttack;
+        charSelect.maxCooldown = charSelect.cooldownAttack;
+        // change animation:
+        charSelect.sprite_index = charSelect.attackSprite;
+        // calculate damage :
+        // if physical:
+        if (charSelect.physicalAttack &gt; 0) {
+            // calculate and deal damage
+            script_execute(scr_calculateDamage,"physical", "monster", charSelect.physicalAttack);
+        }
+        // create slash anim
+        instance_create(currentMonster.x + (sprite_get_width(currentMonster.sprite_index) * 0.25), currentMonster.y + 10, obj_battleSlash);
+        // set monster alarm to draw damage:
+        currentMonster.alarm[0] = 50;
+        currentMonster.alarm[2] = 50;
+   }
+   
+   if (actionSelector == "magic") {
+        // reset cooldown
+        charSelect.cooldown = charSelect.cooldownMagic;
+        charSelect.maxCooldown = charSelect.cooldownMagic;
+        // Change sprite
+        // calculate damage :
+        if (charSelect.fireMagic &gt; 0) {
+            // fire damage inflicted
+            currentMonster.onFire = true;
+            currentMonster.totalFire = charSelect.fireMagic;
+            currentMonster.currentFire = 0;
+            currentMonster.alarm[1] = 1;
+        }
+   }
+   
+   // unselect monster
     selectingMonster = false;
+    // revert back to character select
     instance_create(0, 0, obj_charSelect);
     with (obj_monsterSelector){
         instance_destroy();
-   }
+    }
 }
+
 </string>
           </argument>
         </arguments>
