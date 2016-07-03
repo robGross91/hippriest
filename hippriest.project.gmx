@@ -6,11 +6,32 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\spr_wall</sprite>
-    <sprite>sprites\spr_npc</sprite>
-    <sprite>sprites\spr_npc2</sprite>
-    <sprite>sprites\spr_npc3</sprite>
-    <sprite>sprites\spr_player</sprite>
+    <sprites name="worldSprites">
+      <sprites name="Player">
+        <sprite>sprites\spr_player</sprite>
+        <sprite>sprites\lucario_up</sprite>
+        <sprite>sprites\lucario_right</sprite>
+        <sprite>sprites\lucario_walk_up</sprite>
+        <sprite>sprites\lucario_walk_down</sprite>
+        <sprite>sprites\lucario_left</sprite>
+        <sprite>sprites\lucario_walk_right</sprite>
+        <sprite>sprites\lucario_walk_left</sprite>
+        <sprite>sprites\lucario_down</sprite>
+      </sprites>
+      <sprites name="NPCs">
+        <sprite>sprites\spr_npc_up</sprite>
+        <sprite>sprites\spr_npc_left</sprite>
+        <sprite>sprites\spr_npc_down</sprite>
+        <sprite>sprites\spr_npc_right</sprite>
+      </sprites>
+      <sprites name="Dialogue">
+        <sprite>sprites\spr_dialogue_box</sprite>
+        <sprite>sprites\spr_dialogue_pointer</sprite>
+        <sprite>sprites\spr_dialogue_square</sprite>
+      </sprites>
+      <sprite>sprites\spr_wall</sprite>
+      <sprite>sprites\spr_test_door</sprite>
+    </sprites>
     <sprite>sprites\spr_battlecharselect</sprite>
     <sprites name="battleCharacters">
       <sprite>sprites\spr_battleAxel</sprite>
@@ -34,37 +55,54 @@
     <background>background\tiles_grass8bit</background>
     <background>background\tiles_grass4bit</background>
   </backgrounds>
-  <paths name="paths"/>
+  <paths name="paths">
+    <path>paths\path_npc2</path>
+  </paths>
   <scripts name="scripts">
-    <script>scripts\flashingEvent.gml</script>
-    <script>scripts\flashingEvent2.gml</script>
-    <script>scripts\executeEvent.gml</script>
     <script>scripts\setBattleCharacterSprites.gml</script>
     <script>scripts\initializeStats.gml</script>
+    <script>scripts\worldCollision.gml</script>
+    <script>scripts\turnNPC.gml</script>
+    <script>scripts\drawDialogue.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\fnt_dialogue</font>
+  </fonts>
   <objects name="objects">
+    <object>objects\obj_player</object>
     <objects name="battleCharacters">
       <object>objects\obj_battleJimi</object>
       <object>objects\obj_battleRob</object>
       <object>objects\obj_battleAxel</object>
       <object>objects\obj_battleLorry</object>
     </objects>
-    <object>objects\obj_parent_wall</object>
-    <object>objects\obj_parent_npc</object>
-    <object>objects\obj_player</object>
-    <object>objects\obj_input</object>
-    <object>objects\obj_wall</object>
-    <object>objects\obj_testnpc</object>
+    <objects name="worldParent">
+      <object>objects\obj_input</object>
+      <object>objects\obj_parent_npc</object>
+      <object>objects\obj_parent_wall</object>
+      <object>objects\obj_dialogue</object>
+      <object>objects\obj_room_grid</object>
+    </objects>
+    <objects name="worldNPCs">
+      <object>objects\NPC_TEMPLATE</object>
+      <object>objects\obj_testnpc</object>
+      <object>objects\obj_testnpc2</object>
+      <object>objects\obj_testnpc3</object>
+    </objects>
+    <objects name="worldObjects">
+      <object>objects\obj_wall</object>
+      <object>objects\obj_door</object>
+    </objects>
     <object>objects\obj_parent_battleCharacters</object>
     <object>objects\obj_battleController</object>
     <object>objects\obj_charSelect</object>
-    <object>objects\obj_ground_grass1</object>
     <object>objects\obj_parent_battleMonsters</object>
     <object>objects\obj_battleMonster</object>
     <object>objects\obj_monsterSelector</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_world_view</room>
+    <room>rooms\rm_test</room>
     <room>rooms\rm_battle</room>
   </rooms>
   <help>

@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>speed = 0; //reduces player speed to 0 on collision with any wall object
+            <string>///collision with player
+
+script_execute(worldCollision);
 </string>
           </argument>
         </arguments>

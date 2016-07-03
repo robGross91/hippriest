@@ -1,5 +1,5 @@
-sprite1 = argument0.idleSprite;
-sprite2 = argument0.flashSprite;
+var sprite1 = argument0.idleSprite;
+var sprite2 = argument0.flashSprite;
 
 if argument0.sprite_index = sprite1 {
     argument0.sprite_index = sprite2;

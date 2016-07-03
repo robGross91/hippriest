@@ -8,7 +8,7 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="9" enumb="32">
+    <event eventtype="4" ename="obj_parent_wall">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,14 +25,35 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//determines if the npc is within the interaction range (5px) of the player
-if distance_to_object(obj_player) &lt; 5 {
+            <string>///Collision With Wall
 
-//finds the instance ID of the child npc to this parent NPC and then executes
-//a script.
-var instanceID = instance_nearest(obj_player.x,obj_player.y,obj_parent_npc); //instance ID
-script_execute(executeEvent, instanceID); //works
-}
+
+script_execute(worldCollision);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_player">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Collision With Player
+
+script_execute(worldCollision);
 </string>
           </argument>
         </arguments>

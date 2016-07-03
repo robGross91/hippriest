@@ -28,7 +28,8 @@
             <string>globalvar
 g_keyDirection,          // holds value for active direction key pressed
 g_keyDirectionIsPressed,    // is true when direction key first pressed down
-g_keyDirectionIsReleased;   // is true when direction key is released
+g_keyDirectionIsReleased;  // is true when direction key is released
+
 
 g_keyDirection = -1; // initialize as -1 to ensure no initial false input
 g_keyDirectionIsPressed = false;
@@ -59,7 +60,7 @@ g_keyDirectionIsReleased = false;
 g_keyDirectionIsPressed = false;
 g_keyDirectionIsReleased = false;
 
-// Second, Check for ARROW
+// Second, Check for ARROW or SHIFT
 if (keyboard_check_pressed(vk_right))
 {
     g_keyDirection = 0;
@@ -96,6 +97,7 @@ or  keyboard_check_released(ord('S')))
 {
     g_keyDirectionIsReleased = true;
     g_keyDirection = -1; // Make sure to clear this first
+    
     
     if (keyboard_check(vk_right)) g_keyDirection = 0;   else
     if (keyboard_check(vk_up))    g_keyDirection = 90;  else
