@@ -28,6 +28,8 @@
             <string>idleSprite = spr_battleMonster;
 attackSprite = spr_battleMonsterAttack;
 
+onFire = false;
+
 // setting up probability variables
 
 // action probability is guaged on how many times it triggers
@@ -38,11 +40,22 @@ actionProbability = 5;
 attackProbability = 40;
 spellProbability = 30;
 
+cooldown = 200;
+
 
 attackDamage = 20;
 spellDamage = 30;
 
-monsterHealth = 70;
+maxHealth = 200;
+monsterHealth = maxHealth;
+oldHealth = monsterHealth;
+
+// variables dealing with drawing damage text:
+textDamage = "0";
+textType = "physical";
+textX = 0;
+textY = 0;
+thisDamage = 0;
 </string>
           </argument>
         </arguments>

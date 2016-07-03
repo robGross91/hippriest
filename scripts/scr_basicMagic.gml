@@ -1,0 +1,20 @@
+// basic parameters of item:
+var physicalDefense = 10;
+var fireDefense = 2;
+var lightningDefense = 0;
+
+var physicalAttack = 0;
+var fireAttack = 0;
+var lightningAttack = 0; 
+var cooldownAttack = 500;
+
+var fireMagic = 30;
+var lightningMagic = 0;
+var cooldownMagic = 500;
+
+// if in battle screen:
+if (global.view == "battle") {
+    // in this instance argument0 is 
+    // the relevant battle character object
+    script_execute(scr_assignEquipParams, argument0, physicalDefense, fireDefense, lightningDefense, physicalAttack, fireAttack, lightningAttack, cooldownAttack, fireMagic, lightningMagic, cooldownMagic);
+}

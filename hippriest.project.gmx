@@ -27,21 +27,34 @@
       <sprite>sprites\spr_battleMonsterAttack</sprite>
     </sprites>
     <sprite>sprites\spr_monsterSelector</sprite>
+    <sprites name="battleEffects">
+      <sprite>sprites\spr_battleSlash</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_battle</background>
     <background>background\tiles_grass16bit</background>
     <background>background\tiles_grass8bit</background>
     <background>background\tiles_grass4bit</background>
+    <background>background\bg_battleScenery</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\flashingEvent.gml</script>
     <script>scripts\flashingEvent2.gml</script>
     <script>scripts\executeEvent.gml</script>
-    <script>scripts\setBattleCharacterSprites.gml</script>
-    <script>scripts\initializeStats.gml</script>
+    <script>scripts\setBattleParameters.gml</script>
+    <script>scripts\scr_basicArmor.gml</script>
+    <script>scripts\scr_basicWeapon.gml</script>
+    <script>scripts\scr_basicMagic.gml</script>
+    <script>scripts\scr_assignEquipParams.gml</script>
+    <script>scripts\scr_damageText.gml</script>
+    <script>scripts\scr_drawBar.gml</script>
+    <script>scripts\scr_calculateDamage.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\font_damage</font>
+  </fonts>
   <objects name="objects">
     <objects name="battleCharacters">
       <object>objects\obj_battleJimi</object>
@@ -62,10 +75,11 @@
     <object>objects\obj_parent_battleMonsters</object>
     <object>objects\obj_battleMonster</object>
     <object>objects\obj_monsterSelector</object>
+    <object>objects\obj_battleSlash</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_world_view</room>
     <room>rooms\rm_battle</room>
+    <room>rooms\rm_world_view</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
